@@ -1,32 +1,24 @@
-# Spotify Connected App
-
-End product of the "Build a Spotify Connected App" newline course
-
 ## Local Installation & Set Up
 
-1. Register a Spotify App in your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) and add `http://localhost:8888/callback` as a Redirect URI in the app settings
+1. Register a Spotify App in your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) and add `http://localhost:8888/callback` as a Redirect URI in the app settings. The app name, description, and website URL can be anything.
 
-2. Create a `.env` file at the root of the project based on `.env.example` and add your unique `CLIENT_ID` and `CLIENT_SECRET` from the Spotify dashboard
+2. Create a `.env` file at the root of the project based on `.env.example` and add your unique `CLIENT_ID` and `CLIENT_SECRET` from the Spotify dashboard. The REDIRECT/FRONTEND URIs will be the same as the `.env.example`.
 
-3. Ensure [nvm](https://github.com/nvm-sh/nvm) and [npm](https://www.npmjs.com/) are installed globally
+3. Ensure [npm](https://www.npmjs.com/) is installed globally
 
-4. Install the correct version of Node
-
-    ```shell
-    nvm install
-    ```
-
-5. Install dependencies
+4. Install dependencies
 
     ```shell
     npm install
     ```
 
-6. Run the React app on <http://localhost:3000> and the Node server on <http://localhost:8888>
-
+5. Run the React app on <http://localhost:3000> and the Node server on <http://localhost:8888>. 
     ```shell
     npm start
     ```
+
+The `concurrently` package will allow you to run both with just one command.
+
 
 ## Deploying to Heroku with Git
 
