@@ -1,3 +1,5 @@
+Set-up your own personal spotify tracker that connects your account and displays your top tracks, artists, and playlists based on the given time range.
+
 ## Local Installation & Set Up
 
 1. Register a Spotify App in your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) and add `http://localhost:8888/callback` as a Redirect URI in the app settings. The app name, description, and website URL can be anything.
