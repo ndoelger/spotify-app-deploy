@@ -29,10 +29,10 @@ const LOGIN_URI =
     ? "http://localhost:8888/login"
     : "https://yourspotifystats-039c385e1540.herokuapp.com/login";
 
-const Login = () => (
-  <StyledLoginContainer>
-    <StyledLoginButton href={LOGIN_URI}>Log in to Spotify</StyledLoginButton>
-  </StyledLoginContainer>
-);
-
-export default Login;
+export default function Login() {
+  return (
+    <StyledLoginContainer>
+      <StyledLoginButton href={LOGIN_URI}>Log in to Spotify</StyledLoginButton>
+    </StyledLoginContainer>
+  );
+}

@@ -6,14 +6,14 @@ import { catchErrors } from "../utils";
 import { TrackList, SectionWrapper, Loader } from "../components";
 import { StyledHeader } from "../styles";
 
-const Playlist = () => {
+export default function Playlist() {
   const { id } = useParams();
   const [playlist, setPlaylist] = useState(null);
   const [tracksData, setTracksData] = useState(null);
   const [tracks, setTracks] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       const { data } = await getPlaylistById(id);
       setPlaylist(data);
       setTracksData(data.tracks);
@@ -30,7 +30,7 @@ const Playlist = () => {
 
     // When tracksData updates, check if there are more tracks to fetch
     // then update the state variable
-    const fetchMoreData = async () => {
+    async function fetchMoreData() {
       if (tracksData.next) {
         const { data } = await axios.get(tracksData.next);
         setTracksData(data);
@@ -94,4 +94,3 @@ const Playlist = () => {
   );
 };
 
-export default Playlist;

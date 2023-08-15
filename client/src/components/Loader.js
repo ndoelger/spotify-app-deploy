@@ -46,8 +46,9 @@ const StyledBar = styled.div`
   animation-delay: ${props => props.delay || '0ms'};
 `;
 
-const Loader = () => (
-  <StyledLoader>
+export default function Loader() {
+ return(
+ <StyledLoader>
     <div className="bars">
       <StyledBar delay="250ms" />
       <StyledBar delay="715ms" />
@@ -56,6 +57,5 @@ const Loader = () => (
       <StyledBar delay="190ms" />
     </div>
   </StyledLoader>
-);
-
-export default Loader;
+ )
+};

@@ -27,7 +27,6 @@ const StyledLogoutButton = styled.button`
 `;
 
 // Scroll to top of page when changing routes
-// https://reactrouter.com/web/guides/scroll-restoration/scroll-to-top
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -38,7 +37,7 @@ function ScrollToTop() {
   return null;
 }
 
-function App() {
+export default function App() {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
@@ -81,5 +80,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

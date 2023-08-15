@@ -4,12 +4,12 @@ import { getCurrentUserPlaylists } from '../spotify';
 import { catchErrors } from '../utils';
 import { SectionWrapper, PlaylistsGrid, Loader } from '../components';
 
-const Playlists = () => {
+export default function Playlists() {
   const [playlistsData, setPlaylistsData] = useState(null);
   const [playlists, setPlaylists] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       const { data } = await getCurrentUserPlaylists();
       setPlaylistsData(data);
     };
@@ -26,7 +26,7 @@ const Playlists = () => {
 
     // Playlist endpoint only returns 20 playlists at a time, so we need to
     // make sure we get ALL playlists by fetching the next set of playlists
-    const fetchMoreData = async () => {
+    async function fetchMoreData() {
       if (playlistsData.next) {
         const { data } = await axios.get(playlistsData.next);
         setPlaylistsData(data);
@@ -59,4 +59,3 @@ const Playlists = () => {
   );
 };
 
-export default Playlists;

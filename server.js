@@ -16,12 +16,7 @@ const app = express();
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 
-/**
- * Generates a random string containing numbers and letters
- * @param  {number} length The length of the string
- * @return {string} The generated string
- */
-const generateRandomString = (length) => {
+function generateRandomString(length) {
   let text = "";
   const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -29,11 +24,11 @@ const generateRandomString = (length) => {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
-};
+}
 
 const stateKey = "spotify_auth_state";
 
-app.get("/login", (req, res) => {
+app.get("/login", function (req, res) {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
 
@@ -52,7 +47,7 @@ app.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-app.get("/callback", (req, res) => {
+app.get("/callback", function (req, res) {
   const code = req.query.code || null;
 
   axios({
@@ -70,7 +65,7 @@ app.get("/callback", (req, res) => {
       ).toString("base64")}`,
     },
   })
-    .then((response) => {
+    .then(function (response) {
       if (response.status === 200) {
         const { access_token, refresh_token, expires_in } = response.data;
 
@@ -85,41 +80,41 @@ app.get("/callback", (req, res) => {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }
     })
-    .catch((error) => {
+    .catch(function (error) {
       res.send(error);
     });
 });
 
-app.get("/refresh_token", (req, res) => {
+app.get("/refresh_token", async function (req, res) {
   const { refresh_token } = req.query;
 
-  axios({
-    method: "post",
-    url: "https://accounts.spotify.com/api/token",
-    data: querystring.stringify({
-      grant_type: "refresh_token",
-      refresh_token: refresh_token,
-    }),
-    headers: {
-      "content-type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${new Buffer.from(
-        `${CLIENT_ID}:${CLIENT_SECRET}`
-      ).toString("base64")}`,
-    },
-  })
-    .then((response) => {
-      res.send(response.data);
-    })
-    .catch((error) => {
-      res.send(error);
+  try {
+    const response = await axios({
+      method: "post",
+      url: "https://accounts.spotify.com/api/token",
+      data: querystring.stringify({
+        grant_type: "refresh_token",
+        refresh_token: refresh_token,
+      }),
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${Buffer.from(
+          `${CLIENT_ID}:${CLIENT_SECRET}`
+        ).toString("base64")}`,
+      },
     });
+
+    res.send(response.data);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 // All remaining requests return the React app, so it can handle routing.
-app.get("*", (req, res) => {
+app.get("*", function (req, res) {
   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, function () {
   console.log(`Express app listening at http://localhost:${PORT}`);
 });

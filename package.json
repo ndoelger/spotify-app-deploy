@@ -1,9 +1,9 @@
 {
   "name": "spotify-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Take a look at your favorite artists, songs and playlists on Spotify.",
   "keywords": [],
-  "author": "",
+  "author": "Nic Doelger",
   "license": "ISC",
   "main": "server.js",
   "cacheDirectories": [

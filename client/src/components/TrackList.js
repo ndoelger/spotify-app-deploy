@@ -1,7 +1,8 @@
 import { formatDuration } from '../utils';
 import { StyledTrackList } from '../styles';
 
-const TrackList = ({ tracks }) => (
+export default function TrackList({ tracks }){
+  return(
   <>
     {tracks && tracks.length ? (
       <StyledTrackList>
@@ -40,6 +41,5 @@ const TrackList = ({ tracks }) => (
       <p className="empty-notice">No tracks available</p>
     )}
   </>
-);
-
-export default TrackList;
+  );
+};

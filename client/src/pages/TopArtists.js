@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
-import { getTopArtists } from '../spotify';
-import { catchErrors } from '../utils';
+import { useState, useEffect } from "react";
+import { getTopArtists } from "../spotify";
+import { catchErrors } from "../utils";
 import {
   ArtistsGrid,
   SectionWrapper,
   TimeRangeButtons,
-  Loader
-} from '../components';
+  Loader,
+} from "../components";
 
-const TopArtists = () => {
+export default function TopArtists() {
   const [topArtists, setTopArtists] = useState(null);
-  const [activeRange, setActiveRange] = useState('short');
+  const [activeRange, setActiveRange] = useState("short");
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       const { data } = await getTopArtists(`${activeRange}_term`);
       setTopArtists(data);
-    };
+    }
 
     catchErrors(fetchData());
   }, [activeRange]);
@@ -37,6 +37,4 @@ const TopArtists = () => {
       </SectionWrapper>
     </main>
   );
-};
-
-export default TopArtists;
+}
