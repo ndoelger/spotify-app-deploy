@@ -14,6 +14,7 @@ import {
   Loader,
 } from "../components";
 import { StyledHeader } from "../styles";
+import "../styles/profile.css"
 
 export default function Profile() {
   const [profile, setProfile] = useState(null);
@@ -97,7 +98,10 @@ export default function Profile() {
                 </SectionWrapper>
               </>
             ) : (
-              <Loader />
+              <>
+                <Loader />
+                <h1 style={{textAlign:"center", padding: "29px", marginTop: "-100px", color: "grey"}}> Note: This is a demo app. In order to gain API access, please email doelgern@gmail.com with your name and login email.</h1>
+              </>
             )}
           </main>
         </>

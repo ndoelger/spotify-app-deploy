@@ -29,6 +29,7 @@ export default function Playlists() {
     async function fetchMoreData() {
       if (playlistsData.next) {
         const { data } = await axios.get(playlistsData.next);
+        console.log(data)
         setPlaylistsData(data);
       }
     };
